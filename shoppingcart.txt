@@ -1,0 +1,74 @@
+//Shopping Cart 
+
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+float maxgst=0;
+float total=0;
+
+class items
+{
+    string name;
+    int quantity;
+    float price;
+    float gst;
+    
+    public:
+        void input()
+        {
+            cout<<"\nEnter the name:";
+            cin>> name;
+            cout<<"\nEnter the q,p,gst:";
+            cin>>quantity>>price>>gst;
+        }
+        void cal()
+        {
+            float sum;
+            if(price>500)
+            {
+                price=price-0.05*price;
+            }
+            sum=price*quantity;
+            float dis=disc(sum,gst);
+            sum+=dis;
+            total+=sum;
+            cout<<"\n\nSum:"<<sum;
+            cout<<"Total:"<<total;
+        }
+        void out()
+        {
+            cout<<"\nName:"<<name;
+            cout<<"\nquantity:"<<quantity;
+            cout<<"\nprice:"<<price;
+            cout<<"\nGST:"<<gst;
+        }
+        float disc(float sum,float discount)
+        {
+          float dis;
+          dis=sum*(gst/100.0);
+          if(maxgst<dis)
+          maxgst=dis;
+          return dis;
+}
+}i;
+
+
+int main()
+{
+    int n;
+    std::cout<<"Enter the number of items:";
+    std::cin>>n;
+    items i[n];
+    for(int j=0;j<n;j++)
+    {
+        i[j].input();
+        i[j].cal();
+        i[j].out();
+    }
+    std::cout<<"\n\nMax GST:"<<maxgst;
+    std::cout<<"\nTotal:"<<total;
+    
+
+    return 0;
+}
